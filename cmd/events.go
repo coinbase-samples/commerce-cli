@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/hughescoin/commerce-cli/sdk"
+	"github.com/coinbase-samples/commerce-cli/sdk"
 	"github.com/spf13/cobra"
 )
 

@@ -6,8 +6,8 @@ import (
 	"log"
 	"time"
 
+	"github.com/coinbase-samples/commerce-cli/sdk"
 	"github.com/coinbase-samples/commerce-sdk-go"
-	"github.com/hughescoin/commerce-cli/sdk"
 
 	"github.com/spf13/cobra"
 )
