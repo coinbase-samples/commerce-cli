@@ -2,6 +2,7 @@ package cli
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"time"
@@ -28,7 +29,12 @@ var eventsCmd = &cobra.Command{
 			if err != nil {
 				log.Fatalf("error retrieving event %s error: %s\n", setEventId, err)
 			}
-			fmt.Println(event)
+			eventJson, err := json.MarshalIndent(event, "", " ")
+			if err != nil {
+				log.Fatalf("error marshalling events into JSON \n all events: %v ", event)
+			}
+
+			fmt.Printf("event %s found \n", string(eventJson))
 			return
 		}
 
@@ -37,8 +43,12 @@ var eventsCmd = &cobra.Command{
 			if err != nil {
 				log.Fatalf("error retrieving events %s", err)
 			}
+			eventsJson, err := json.MarshalIndent(allEvents, "", " ")
+			if err != nil {
+				log.Fatalf("error marshalling events into JSON \n all events: %v ", allEvents)
+			}
 
-			fmt.Println(allEvents)
+			fmt.Println(string(eventsJson))
 			return
 		}
 
