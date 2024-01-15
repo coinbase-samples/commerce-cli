@@ -2,6 +2,7 @@ package cli
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"time"
@@ -33,7 +34,7 @@ var chargesCmd = &cobra.Command{
 		}
 
 		if setPriceValue == "" && setChargeId == "" {
-			log.Fatalf("Please provide either --setprice or --get flag.")
+			log.Fatalf("Please provide either --setPrice (-p) or --get (-g) flag.")
 		}
 
 		if setPriceValue != "" {
@@ -48,7 +49,11 @@ var chargesCmd = &cobra.Command{
 			if err != nil {
 				log.Fatalf("error creating charge: %s ", err)
 			}
-			fmt.Printf("charge created successfully: %v\n", resp.Data)
+			jsonResponse, err := json.MarshalIndent(resp, "", " ")
+			if err != nil {
+				log.Fatalf("error marshalling response into JSON: %s \n. charge response: %v", err, resp.Data)
+			}
+			fmt.Printf("charge created: \n %s", string(jsonResponse))
 
 		}
 
@@ -57,8 +62,11 @@ var chargesCmd = &cobra.Command{
 			if err != nil {
 				log.Fatalf("Error obtaining charge: %s - error: %s\n", setChargeId, err)
 			}
-
-			fmt.Printf("Charge details: %+v\n", charge)
+			chargeJson, err := json.MarshalIndent(charge, "", " ")
+			if err != nil {
+				log.Fatalf("error marshalling response into JSON: %s \n. charge response: %v", err, charge)
+			}
+			fmt.Printf("charge %s retreived: \n %s", setChargeId, string(chargeJson))
 		}
 
 	},
@@ -66,6 +74,6 @@ var chargesCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(chargesCmd)
-	chargesCmd.Flags().StringVarP(&setPriceValue, "setPrice", "p", "", "Set the price for the charge")
+	chargesCmd.Flags().StringVarP(&setPriceValue, "setPrice", "p", "", "Set the price for a charge")
 	chargesCmd.Flags().StringVarP(&setChargeId, "get", "g", "", "Retrieve a charge by its code")
 }
