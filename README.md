@@ -33,74 +33,77 @@ mv ./commerce usr/loca/bin
    This will create a $1.50 charge with a payment link (hosted_url)
    example output should be:
 
-   ```json
-   charge created:
-   {
-   "data": {
-   "brand_color": "#000000",
-   "brand_logo_url": "https://res.cloudinary.com/commerce/image/upload/v1653516296/dlwoolpero6qgsffxmpz.jpg",
-   "charge_kind": "WEB3",
-   "code": "6EE5J2V8",
-   "confirmed_at": "",
-   "created_at": "2024-01-15T21:32:49Z",
-   "expires_at": "2024-01-17T21:32:49Z",
-   "hosted_url": "https://commerce.coinbase.com/pay/131bf7a0-69be-4b63-a8da-847ff831eb46",
-   "id": "131bf7a0-69be-4b63-a8da-847ff831eb46",
-   "organization_name": "Patrick's Fine Art",
-   "pricing": {
-   "local": {
-    "amount": "1.5",
-    "currency": "USD"
-   },
-   "settlement": {
-    "amount": "1.5",
-    "currency": "USDC"
-   }
-   },
-   "pricing_type": "fixed_price",
-   "redirects": {
-   "cancel_url": "",
-   "success_url": "",
-   "will_redirect_after_success": false
-   },
-   "support_email": "patrick.hughes@coinbase.com",
-   "timeline": [
-   {
-    "status": "NEW",
-    "time": "2024-01-15T21:32:49Z"
-   }
-   ],
-   "web3_data": {
-   "transfer_intent": {
-    "call_data": {
-     "deadline": "",
-     "fee_amount": "",
-     "id": "",
-     "operator": "",
-     "prefix": "",
-     "recipient": "",
-     "recipient_amount": "",
-     "recipient_currency": "",
-     "refund_destination": "",
-     "signature": ""
+```shell
+charge created:
+```
+
+```json
+{
+  "data": {
+    "brand_color": "#000000",
+    "brand_logo_url": "https://res.cloudinary.com/commerce/image/upload/v1653516296/dlwoolpero6qgsffxmpz.jpg",
+    "charge_kind": "WEB3",
+    "code": "6EE5J2V8",
+    "confirmed_at": "",
+    "created_at": "2024-01-15T21:32:49Z",
+    "expires_at": "2024-01-17T21:32:49Z",
+    "hosted_url": "https://commerce.coinbase.com/pay/131bf7a0-69be-4b63-a8da-847ff831eb46",
+    "id": "131bf7a0-69be-4b63-a8da-847ff831eb46",
+    "organization_name": "Patrick's Fine Art",
+    "pricing": {
+      "local": {
+        "amount": "1.5",
+        "currency": "USD"
+      },
+      "settlement": {
+        "amount": "1.5",
+        "currency": "USDC"
+      }
     },
-    "metadata": {
-     "chain_id": 0,
-     "contract_address": "",
-     "sender": ""
+    "pricing_type": "fixed_price",
+    "redirects": {
+      "cancel_url": "",
+      "success_url": "",
+      "will_redirect_after_success": false
+    },
+    "support_email": "patrick.hughes@coinbase.com",
+    "timeline": [
+      {
+        "status": "NEW",
+        "time": "2024-01-15T21:32:49Z"
+      }
+    ],
+    "web3_data": {
+      "transfer_intent": {
+        "call_data": {
+          "deadline": "",
+          "fee_amount": "",
+          "id": "",
+          "operator": "",
+          "prefix": "",
+          "recipient": "",
+          "recipient_amount": "",
+          "recipient_currency": "",
+          "refund_destination": "",
+          "signature": ""
+        },
+        "metadata": {
+          "chain_id": 0,
+          "contract_address": "",
+          "sender": ""
+        }
+      },
+      "success_events": [],
+      "failure_events": [],
+      "contract_addresses": {
+        "1": "0x7915f087685fffD71608E5d118f3B70c27D9eF4e",
+        "137": "0x7f52269092F2a5EF06C36C91e46F9196deb90336",
+        "8453": "0x9Bb4D44e6963260A1850926E8f6bEB8d5803836F"
+      }
     }
-   },
-   "success_events": [],
-   "failure_events": [],
-   "contract_addresses": {
-    "1": "0x7915f087685fffD71608E5d118f3B70c27D9eF4e",
-    "137": "0x7f52269092F2a5EF06C36C91e46F9196deb90336",
-    "8453": "0x9Bb4D44e6963260A1850926E8f6bEB8d5803836F"
-   }
-   }
-   }
-   }
-   ```
+  }
+}
+```
 
 ## Usage
 
