@@ -30,14 +30,8 @@ var chargesCmd = &cobra.Command{
 		}
 
 		if setPriceValue != "" && setChargeId != "" {
-			log.Fatalf("cannot have both a PriceValue and ChargeId")
-		}
-
-		if setPriceValue == "" && setChargeId == "" {
-			log.Fatalf("Please provide either --setPrice (-p) or --get (-g) flag.")
-		}
-
-		if setPriceValue != "" {
+			log.Fatalf("cannot have both a price and charge id")
+		} else if setPriceValue != "" {
 			chargeReq := commerce.ChargeRequest{
 				PricingType: "fixed_price",
 				LocalPrice: &commerce.LocalPrice{
@@ -55,9 +49,7 @@ var chargesCmd = &cobra.Command{
 			}
 			fmt.Printf("charge created: \n %s", string(jsonResponse))
 
-		}
-
-		if setChargeId != "" {
+		} else if setChargeId != "" {
 			charge, err := sdk.Client.GetCharge(ctx, setChargeId)
 			if err != nil {
 				log.Fatalf("Error obtaining charge: %s - error: %s\n", setChargeId, err)
@@ -67,8 +59,9 @@ var chargesCmd = &cobra.Command{
 				log.Fatalf("error marshalling response into JSON: %s \n. charge response: %v", err, charge)
 			}
 			fmt.Printf("charge %s retreived: \n %s", setChargeId, string(chargeJson))
+		} else {
+			log.Fatalf("Please provide either --setPrice (-p) or --get (-g) flag.")
 		}
-
 	},
 }
 
