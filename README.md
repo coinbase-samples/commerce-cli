@@ -21,7 +21,7 @@ go build -o commerce
 3. Move executible in local bin
 
 ```shell
-mv ./commerce usr/local/bin
+sudo mv ./commerce usr/local/bin
 ```
 
 4. Create a charge by running
