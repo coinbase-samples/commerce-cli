@@ -138,7 +138,7 @@ commerce events --all
 ### Retrieve a specific event
 
 > [!TIP]
-> Be sure to use the event id and not the charge id or charge code this will prevent any errors from occuring.
+> Be sure to use the event id and **not** the charge id or charge code this will prevent any errors from occuring.
 
 ```shell
 commerce events --get [event_id]
