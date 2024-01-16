@@ -1,6 +1,6 @@
 # Coinbase Commerce CLI tool
 
-The _Coinbase Commerce CLI Tool_ is a cli interface for interacting with the [_Commerce Go SDK_](https://github.com/coinbase-samples/commerce-sdk-go) sample library.
+The _Coinbase Commerce CLI Tool_ is a cli interface for interacting with the [_Commerce Go SDK_](https://github.com/coinbase-samples/commerce-sdk-go) sample library, an SDK built on top of the [Coinbase Commerce API](https://www.coinbase.com/commerce).
 
 Easily create, retrieve, and review charges using command line arguments.
 
@@ -12,7 +12,7 @@ Easily create, retrieve, and review charges using command line arguments.
 export COMMERCE_API_KEY=123-YOUR-API-KEY
 ```
 
-2. Build the CLI by running
+2. Build the CLI executable by running
 
 ```shell
 go build -o commerce
@@ -32,10 +32,6 @@ mv ./commerce usr/loca/bin
 
    This will create a $1.50 charge with a payment link (hosted_url)
    example output should be:
-
-```shell
-charge created:
-```
 
 ```json
 {
@@ -107,7 +103,7 @@ charge created:
 
 ## Usage
 
-The Coinbase Commerce CLI tool allows you to create and view charges with a valid API key.
+The Coinbase Commerce CLI tool allows you to create and view charges with a valid API key as well as webhook events.
 
 ### Create a charge
 
