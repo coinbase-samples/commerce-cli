@@ -119,7 +119,7 @@ Replace `[amount]` with the desired charge amount (e.g., 1.5 for $1.50).
 commerce charges --get [charge_id]
 ```
 
-Replace [charge_id] with the specific ID of the charge you want to retrieve.
+Replace `[charge_id]` with the specific ID of the charge you want to retrieve.
 
 ### Events
 
@@ -134,10 +134,10 @@ commerce events --all
 ### Retrieve a specific event
 
 > [!TIP]
-> Be sure to use the event id and **not** the charge id or charge code this will prevent any errors from occuring.
+> Be sure to use the event's `id` **not** the charge's `id` or charge's `code` this will prevent any errors from occuring.
 
 ```shell
 commerce events --get [event_id]
 ```
 
-Replace [event_id] with the ID of the event you wish to retrieve.
+Replace `[event_id]` with the ID of the event you wish to retrieve.
