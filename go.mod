@@ -1,11 +1,8 @@
 module github.com/coinbase-samples/commerce-cli
 
-replace github.com/coinbase-samples/commerce-sdk-go => /Users/patrickhughes/Code/patrick-hughes/commerce-sdk
-
 go 1.20
 
 require (
-	github.com/coinbase-samples/commerce-sdk-go v0.0.0-00010101000000-000000000000
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/cobra-cli v1.3.0
 )
