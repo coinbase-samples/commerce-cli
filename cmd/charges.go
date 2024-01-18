@@ -19,7 +19,7 @@ var setChargeId string
 var chargesCmd = &cobra.Command{
 	Use:   "charges",
 	Short: "Interact with the charges endpoint",
-	Long:  `Interact with the Coinbase Commerce charges endpoint to create and view charges.`,
+	Long:  ChargesLongDescription,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
