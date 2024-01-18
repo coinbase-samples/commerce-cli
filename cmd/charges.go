@@ -32,14 +32,14 @@ var chargesCmd = &cobra.Command{
 		if setPriceValue != "" && setChargeId != "" {
 			log.Fatalf("cannot have both a price and charge id")
 		} else if setPriceValue != "" {
-			chargeReq := commerce.ChargeRequest{
+			chargeReq := &commerce.ChargeRequest{
 				PricingType: "fixed_price",
 				LocalPrice: &commerce.LocalPrice{
 					Amount:   setPriceValue,
 					Currency: "USD",
 				},
 			}
-			resp, err := sdk.Client.CreateCharge(ctx, &chargeReq)
+			resp, err := sdk.Client.CreateCharge(ctx, chargeReq)
 			if err != nil {
 				log.Fatalf("error creating charge: %s ", err)
 			}
