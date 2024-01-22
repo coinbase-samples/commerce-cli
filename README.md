@@ -12,19 +12,15 @@ Easily create, retrieve, and review charges using command line arguments.
 export COMMERCE_API_KEY=123-YOUR-API-KEY
 ```
 
-2. Build the CLI executable by running
+2. Create the Commerce CLI application by running:
 
 ```shell
-go build -o commerce
+make start
 ```
 
-3. Move executible in local bin
+This will build the CLI and move the executible to your local bin folder
 
-```shell
-sudo mv ./commerce /usr/local/bin
-```
-
-4. Create a charge by running
+3. Create a charge by running:
 
    ```shell
    commerce charges --setPrice 1.5
