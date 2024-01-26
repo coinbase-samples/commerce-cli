@@ -3,7 +3,7 @@ module github.com/coinbase-samples/commerce-cli
 go 1.20
 
 require (
-	github.com/coinbase-samples/commerce-sdk-go v0.1.2
+	github.com/coinbase-samples/commerce-sdk-go v0.1.3
 	github.com/spf13/cobra v1.7.0
 )
 
