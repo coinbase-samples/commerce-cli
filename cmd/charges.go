@@ -2,13 +2,10 @@ package cli
 
 import (
 	"context"
-	"encoding/json"
-	"fmt"
 	"log"
 	"time"
 
 	"github.com/coinbase-samples/commerce-cli/sdk"
-	"github.com/coinbase-samples/commerce-sdk-go"
 
 	"github.com/spf13/cobra"
 )
@@ -32,33 +29,19 @@ var chargesCmd = &cobra.Command{
 		if setPriceValue != "" && setChargeId != "" {
 			log.Fatalf("cannot have both a price and charge id")
 		} else if setPriceValue != "" {
-			chargeReq := &commerce.ChargeRequest{
-				PricingType: "fixed_price",
-				LocalPrice: &commerce.LocalPrice{
-					Amount:   setPriceValue,
-					Currency: "USD",
-				},
-			}
+			chargeReq := BuildCharge(setPriceValue)
 			resp, err := sdk.Client.CreateCharge(ctx, chargeReq)
 			if err != nil {
 				log.Fatalf("error creating charge: %s ", err)
 			}
-			jsonResponse, err := json.MarshalIndent(resp, "", " ")
-			if err != nil {
-				log.Fatalf("error marshalling response into JSON: %s \n. charge response: %v", err, resp.Data)
-			}
-			fmt.Printf("charge created: \n %s", string(jsonResponse))
+			ChargeToJSON(resp)
 
 		} else if setChargeId != "" {
 			charge, err := sdk.Client.GetCharge(ctx, setChargeId)
 			if err != nil {
 				log.Fatalf("Error obtaining charge: %s - error: %s\n", setChargeId, err)
 			}
-			chargeJson, err := json.MarshalIndent(charge, "", " ")
-			if err != nil {
-				log.Fatalf("error marshalling response into JSON: %s \n. charge response: %v", err, charge)
-			}
-			fmt.Printf("charge %s retreived: \n %s", setChargeId, string(chargeJson))
+			ChargeToJSON(charge)
 		} else {
 			log.Fatalf("Please provide either --setPrice (-p) or --get (-g) flag.")
 		}
