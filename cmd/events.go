@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var setEventId string
+var eventId string
 var all bool
 
 var eventsCmd = &cobra.Command{
@@ -21,22 +21,22 @@ var eventsCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 
-		if setEventId != "" {
+		if eventId != "" {
 
-			event, err := sdk.Client.ShowEvent(ctx, setEventId)
+			event, err := sdk.Client.ShowEvent(ctx, eventId)
 			if err != nil {
-				log.Fatalf("error retrieving event %s error: %s\n", setEventId, err)
+				log.Fatalf("error retrieving event %s error: %s\n", eventId, err)
 			}
 			EventToJSON(event)
 			return
 		}
 
 		if all {
-			allEvents, err := sdk.Client.ListEvents(ctx)
+			events, err := sdk.Client.ListEvents(ctx)
 			if err != nil {
 				log.Fatalf("error retrieving events %s", err)
 			}
-			EventsToJSON(allEvents)
+			EventsToJSON(events)
 			return
 		}
 		log.Fatal("Please provide an eventId to retrieve: `events --get <eventId>`")
@@ -45,7 +45,7 @@ var eventsCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(eventsCmd)
-	eventsCmd.Flags().StringVarP(&setEventId, "get", "g", "", "Retrieves an event by its id")
+	eventsCmd.Flags().StringVarP(&eventId, "get", "g", "", "Retrieves an event by its id")
 	eventsCmd.Flags().BoolVar(&all, "all", false, "Retrieve all events")
 
 }
