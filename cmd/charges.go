@@ -10,8 +10,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var setPriceValue string
-var setChargeId string
+var amount string
+var chargeId string
 
 var chargesCmd = &cobra.Command{
 	Use:   "charges",
@@ -26,20 +26,20 @@ var chargesCmd = &cobra.Command{
 			log.Fatalf("client not initialized")
 		}
 
-		if setPriceValue != "" && setChargeId != "" {
+		if amount != "" && chargeId != "" {
 			log.Fatalf("cannot have both a price and charge id")
-		} else if setPriceValue != "" {
-			chargeReq := BuildCharge(setPriceValue)
+		} else if amount != "" {
+			chargeReq := BuildCharge(amount)
 			resp, err := sdk.Client.CreateCharge(ctx, chargeReq)
 			if err != nil {
 				log.Fatalf("error creating charge: %s ", err)
 			}
 			ChargeToJSON(resp)
 
-		} else if setChargeId != "" {
-			charge, err := sdk.Client.GetCharge(ctx, setChargeId)
+		} else if chargeId != "" {
+			charge, err := sdk.Client.GetCharge(ctx, chargeId)
 			if err != nil {
-				log.Fatalf("Error obtaining charge: %s - error: %s\n", setChargeId, err)
+				log.Fatalf("Error obtaining charge: %s - error: %s\n", chargeId, err)
 			}
 			ChargeToJSON(charge)
 		} else {
@@ -50,6 +50,6 @@ var chargesCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(chargesCmd)
-	chargesCmd.Flags().StringVarP(&setPriceValue, "setPrice", "p", "", "Set the price for a charge")
-	chargesCmd.Flags().StringVarP(&setChargeId, "get", "g", "", "Retrieve a charge by its code")
+	chargesCmd.Flags().StringVarP(&amount, "setPrice", "p", "", "Set the price for a charge")
+	chargesCmd.Flags().StringVarP(&chargeId, "get", "g", "", "Retrieve a charge by its code")
 }

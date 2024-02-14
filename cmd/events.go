@@ -10,7 +10,7 @@ import (
 )
 
 var setEventId string
-var getAll bool
+var all bool
 
 var eventsCmd = &cobra.Command{
 	Use:   "events",
@@ -31,7 +31,7 @@ var eventsCmd = &cobra.Command{
 			return
 		}
 
-		if getAll {
+		if all {
 			allEvents, err := sdk.Client.ListEvents(ctx)
 			if err != nil {
 				log.Fatalf("error retrieving events %s", err)
@@ -46,6 +46,6 @@ var eventsCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(eventsCmd)
 	eventsCmd.Flags().StringVarP(&setEventId, "get", "g", "", "Retrieves an event by its id")
-	eventsCmd.Flags().BoolVar(&getAll, "all", false, "Retrieve all events")
+	eventsCmd.Flags().BoolVar(&all, "all", false, "Retrieve all events")
 
 }
