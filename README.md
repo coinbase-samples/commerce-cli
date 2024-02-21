@@ -35,13 +35,13 @@ This will build the CLI and move the executible to your local bin folder
     "brand_color": "#000000",
     "brand_logo_url": "https://res.cloudinary.com/commerce/image/upload/v1653516296/dlwoolpero6qgsffxmpz.jpg",
     "charge_kind": "WEB3",
-    "code": "6EE5J2V8",
+    "code": "6EE5J2V9",
     "confirmed_at": "",
     "created_at": "2024-01-15T21:32:49Z",
     "expires_at": "2024-01-17T21:32:49Z",
-    "hosted_url": "https://commerce.coinbase.com/pay/131bf7a0-69be-4b63-a8da-847ff831eb46",
+    "hosted_url": "https://commerce.coinbase.com/pay/131bf7a0-69be-4b63-a8da-847ff831bb46",
     "id": "131bf7a0-69be-4b63-a8da-847ff831eb46",
-    "organization_name": "Patrick's Fine Art",
+    "organization_name": "Online Store",
     "pricing": {
       "local": {
         "amount": "1.5",
@@ -58,7 +58,7 @@ This will build the CLI and move the executible to your local bin folder
       "success_url": "",
       "will_redirect_after_success": false
     },
-    "support_email": "patrick.hughes@coinbase.com",
+    "support_email": "support@email.com",
     "timeline": [
       {
         "status": "NEW",
