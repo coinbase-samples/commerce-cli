@@ -47,5 +47,4 @@ func init() {
 	rootCmd.AddCommand(eventsCmd)
 	eventsCmd.Flags().StringVarP(&eventId, "get", "g", "", "Retrieves an event by its id")
 	eventsCmd.Flags().BoolVar(&all, "all", false, "Retrieve all events")
-
 }

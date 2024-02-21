@@ -35,7 +35,6 @@ var chargesCmd = &cobra.Command{
 				log.Fatalf("error creating charge: %s ", err)
 			}
 			ChargeToJSON(resp)
-
 		} else if chargeId != "" {
 			charge, err := sdk.Client.GetCharge(ctx, chargeId)
 			if err != nil {
