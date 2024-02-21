@@ -21,8 +21,7 @@ var eventsCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 
-		if eventId != "" {
-
+		if cmd.Flag("get").Changed {
 			event, err := sdk.Client.ShowEvent(ctx, eventId)
 			if err != nil {
 				log.Fatalf("error retrieving event %s error: %s\n", eventId, err)
