@@ -26,16 +26,16 @@ var chargesCmd = &cobra.Command{
 			log.Fatalf("client not initialized")
 		}
 
-		if amount != "" && chargeId != "" {
+		if cmd.Flag("setPrice").Changed && cmd.Flag("get").Changed {
 			log.Fatalf("cannot have both a price and charge id")
-		} else if amount != "" {
+		} else if cmd.Flag("setPrice").Changed {
 			chargeReq := BuildCharge(amount)
 			resp, err := sdk.Client.CreateCharge(ctx, chargeReq)
 			if err != nil {
 				log.Fatalf("error creating charge: %s ", err)
 			}
 			ChargeToJSON(resp)
-		} else if chargeId != "" {
+		} else if cmd.Flag("get").Changed {
 			charge, err := sdk.Client.GetCharge(ctx, chargeId)
 			if err != nil {
 				log.Fatalf("Error obtaining charge: %s - error: %s\n", chargeId, err)
@@ -44,11 +44,12 @@ var chargesCmd = &cobra.Command{
 		} else {
 			log.Fatalf("Please provide either --setPrice (-p) or --get (-g) flag.")
 		}
+
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(chargesCmd)
-	chargesCmd.Flags().StringVarP(&amount, "setPrice", "p", "", "Set the price for a charge")
-	chargesCmd.Flags().StringVarP(&chargeId, "get", "g", "", "Retrieve a charge by its code")
+	chargesCmd.Flags().StringVarP(&amount, "create", "p", "", "Set the price for a charge")
+	chargesCmd.Flags().StringVarP(&chargeId, "get", "g", "", "Retrieve a charge by its id")
 }
