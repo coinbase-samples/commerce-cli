@@ -56,6 +56,6 @@ func init() {
 	rootCmd.AddCommand(chargesCmd)
 	chargesCmd.Flags().BoolVar(&create, "create", false, "Create a new charge")
 	chargesCmd.Flags().BoolVar(&get, "get", false, "Retrieve an existing charge by its id")
-	chargesCmd.Flags().StringVarP(&amount, "create", "p", "", "Set the price for a charge")
+	chargesCmd.Flags().StringVarP(&amount, "amount", "p", "", "Set the price for a charge")
 	chargesCmd.Flags().StringVar(&chargeId, "id", "", "Retrieve a charge by its id")
 }
