@@ -1,4 +1,4 @@
-.PHONY: start
+.PHONY: build
 
 
 start: 
