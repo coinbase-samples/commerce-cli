@@ -5,7 +5,6 @@ import (
 	"log"
 	"time"
 
-	"github.com/coinbase-samples/commerce-cli/sdk"
 	"github.com/spf13/cobra"
 )
 
@@ -28,7 +27,7 @@ var createCmd = &cobra.Command{
 		}
 
 		chargeReq := BuildCharge(chargeType, amount, currency, redirect)
-		resp, err := sdk.Client.CreateCharge(ctx, chargeReq)
+		resp, err := Client.CreateCharge(ctx, chargeReq)
 		if err != nil {
 			log.Fatalf("error creating charge: %s ", err)
 		}

@@ -5,7 +5,6 @@ import (
 	"log"
 	"time"
 
-	"github.com/coinbase-samples/commerce-cli/sdk"
 	"github.com/spf13/cobra"
 )
 
@@ -21,7 +20,7 @@ var chargesCmd = &cobra.Command{
 		defer cancel()
 
 		if chargeId != "" {
-			charge, err := sdk.Client.GetCharge(ctx, chargeId)
+			charge, err := Client.GetCharge(ctx, chargeId)
 			if err != nil {
 				log.Fatalf("Error obtaining charge: %s - error: %s", chargeId, err)
 			}

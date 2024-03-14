@@ -5,7 +5,6 @@ import (
 	"log"
 	"time"
 
-	"github.com/coinbase-samples/commerce-cli/sdk"
 	"github.com/spf13/cobra"
 )
 
@@ -16,7 +15,7 @@ var eventsCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 
-		events, err := sdk.Client.ListEvents(ctx)
+		events, err := Client.ListEvents(ctx)
 		if err != nil {
 			log.Fatalf("error retrieving events: %s", err)
 		}
@@ -37,7 +36,7 @@ var getEventCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 
-		event, err := sdk.Client.ShowEvent(ctx, eventId)
+		event, err := Client.ShowEvent(ctx, eventId)
 		if err != nil {
 			log.Fatalf("error retrieving event %s: %s", eventId, err)
 		}
