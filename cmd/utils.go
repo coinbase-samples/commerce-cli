@@ -8,6 +8,7 @@ import (
 	"github.com/coinbase-samples/commerce-sdk-go"
 )
 
+// change to mention create subcommand
 var ChargesLongDescription = `Interact with the Coinbase Commerce charges endpoint to create and view charges. Use --setPrice to create a new charge with a specified USD amount. The --get flag requires a charge_id to retrieve a specific charge.
 
 Examples:
@@ -24,6 +25,13 @@ Examples:
 - Retrieve a specific event: 'commerce events --get <event_id>'
 
 Events are displayed in JSON format.
+`
+
+var CreateLongDescription = `
+
+Examples:
+- create a fixed price charge: commerce charges create --type fixed --amount 5.00 
+- create a donation charge: commerce charges create --type donation --amount 5.00 
 `
 
 func EventToJSON(e *commerce.SingleEvent) {
@@ -52,13 +60,19 @@ func ChargeToJSON(c *commerce.ChargeResponse) {
 
 }
 
-func BuildCharge(v string) *commerce.ChargeRequest {
-	c := &commerce.ChargeRequest{
-		PricingType: "fixed_price",
-		LocalPrice: &commerce.LocalPrice{
-			Amount:   v,
-			Currency: "USD",
-		},
+func BuildCharge(chargeType, amount, currency, redirect string) *commerce.ChargeRequest {
+
+	if chargeType != "fixed_price" && chargeType != "no_price" {
+		log.Fatalf("cannot create charge of type %s. Please use 'fixed_price' or 'no_price'", chargeType)
 	}
-	return c
+
+	charge := &commerce.ChargeRequest{
+		PricingType: chargeType,
+		LocalPrice: &commerce.LocalPrice{
+			Amount:   amount,
+			Currency: currency,
+		},
+		RedirectUrl: redirect,
+	}
+	return charge
 }
