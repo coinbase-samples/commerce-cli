@@ -9,41 +9,46 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var eventId string
-var all bool
-
 var eventsCmd = &cobra.Command{
 	Use:   "events",
-	Short: "Interact with the events endpoint",
-	Long:  EventsLongDescription,
+	Short: "Retrieve Commerce events data",
 	Run: func(cmd *cobra.Command, args []string) {
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+
+		events, err := sdk.Client.ListEvents(ctx)
+		if err != nil {
+			log.Fatalf("error retrieving events: %s", err)
+		}
+		EventsToJSON(events)
+	},
+}
+
+var getEventCmd = &cobra.Command{
+	Use:   "get",
+	Short: "Retrieve a specific event by its ID",
+	Run: func(cmd *cobra.Command, args []string) {
+		eventId, _ := cmd.Flags().GetString("id")
+
+		if eventId == "" {
+			log.Fatal("Please specify an event ID with --id")
+		}
 
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 
-		if cmd.Flag("get").Changed {
-			event, err := sdk.Client.ShowEvent(ctx, eventId)
-			if err != nil {
-				log.Fatalf("error retrieving event %s error: %s\n", eventId, err)
-			}
-			EventToJSON(event)
-			return
+		event, err := sdk.Client.ShowEvent(ctx, eventId)
+		if err != nil {
+			log.Fatalf("error retrieving event %s: %s", eventId, err)
 		}
-
-		if all {
-			events, err := sdk.Client.ListEvents(ctx)
-			if err != nil {
-				log.Fatalf("error retrieving events %s", err)
-			}
-			EventsToJSON(events)
-			return
-		}
-		log.Fatal("Please provide an eventId to retrieve: `events --get <eventId>`")
+		EventToJSON(event)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(eventsCmd)
-	eventsCmd.Flags().StringVarP(&eventId, "get", "g", "", "Retrieves an event by its id")
-	eventsCmd.Flags().BoolVar(&all, "all", false, "Retrieve all events")
+	eventsCmd.AddCommand(getEventCmd)
+
+	getEventCmd.Flags().String("id", "", "ID of the event to retrieve")
+	getEventCmd.MarkFlagRequired("id")
 }
