@@ -8,12 +8,11 @@ import (
 	"github.com/coinbase-samples/commerce-sdk-go"
 )
 
-// change to mention create subcommand
 var ChargesLongDescription = `Interact with the Coinbase Commerce charges endpoint to create and view charges. Use --setPrice to create a new charge with a specified USD amount. The --get flag requires a charge_id to retrieve a specific charge.
 
 Examples:
-- Create a new charge: 'commerce charges --setPrice 1.5'
-- Retrieve a specific charge: 'commerce charges --get <charge_id>'
+- Create a new charge: 'commerce charges create --amount 2'
+- Retrieve a specific charge: 'commerce charges --id <charge_id>'
 
 Charges are presented in JSON format. All errors are returned in a standard error format.
 `
@@ -30,8 +29,8 @@ Events are displayed in JSON format.
 var CreateLongDescription = `
 
 Examples:
-- create a fixed price charge: commerce charges create --type fixed --amount 5.00 
-- create a donation charge: commerce charges create --type donation --amount 5.00 
+- create a fixed price charge: 'commerce charges create --type fixed --amount 5.00'
+- create a donation charge: 'commerce charges create --type donation --amount 5.00'
 `
 
 func EventToJSON(e *commerce.SingleEvent) {
