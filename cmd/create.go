@@ -41,7 +41,7 @@ func init() {
 	chargesCmd.AddCommand(createCmd)
 	createCmd.Flags().StringVarP(&amount, "amount", "p", "", "Set amount to charge")
 	createCmd.Flags().StringVarP(&redirect, "redirect", "r", "", "URL to redirect to after charge creation")
-	createCmd.Flags().StringVarP(&currency, "currency", "c", "", "Currency of the charge (ex: USD)")
+	createCmd.Flags().StringVarP(&currency, "currency", "c", "USD", "Currency of the charge (ex: USD)")
 	createCmd.Flags().StringVarP(&chargeType, "type", "t", "fixed_price", "Type of the charge: 'fixed' or 'none'")
 	createCmd.MarkFlagRequired("amount")
 }
