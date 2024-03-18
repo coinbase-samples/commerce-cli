@@ -2,6 +2,7 @@ package cli
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"time"
 
@@ -12,6 +13,7 @@ var currency string
 var redirect string
 var chargeType string
 var amount string
+var format string
 
 var createCmd = &cobra.Command{
 	Use:   "create",
@@ -27,11 +29,15 @@ var createCmd = &cobra.Command{
 		}
 
 		chargeReq := BuildCharge(chargeType, amount, currency, redirect)
-		resp, err := Client.CreateCharge(ctx, chargeReq)
+		charge, err := Client.CreateCharge(ctx, chargeReq)
 		if err != nil {
 			log.Fatalf("error creating charge: %s ", err)
 		}
-		ChargeToJSON(resp)
+		response, err := ResponseToJson(cmd, charge)
+		if err != nil {
+			fmt.Print(err)
+		}
+		fmt.Print(response)
 
 	},
 }
@@ -43,5 +49,6 @@ func init() {
 	createCmd.Flags().StringVarP(&redirect, "redirect", "r", "", "URL to redirect to after charge creation")
 	createCmd.Flags().StringVarP(&currency, "currency", "c", "USD", "Currency of the charge (ex: USD)")
 	createCmd.Flags().StringVarP(&chargeType, "type", "t", "fixed_price", "Type of the charge: 'fixed' or 'none'")
+	createCmd.Flags().StringVarP(&format, "format", "f", "false", "Pass true for formatted JSON. Default is false")
 	createCmd.MarkFlagRequired("amount")
 }

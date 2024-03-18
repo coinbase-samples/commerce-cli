@@ -2,6 +2,7 @@ package cli
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"time"
 
@@ -19,7 +20,11 @@ var eventsCmd = &cobra.Command{
 		if err != nil {
 			log.Fatalf("error retrieving events: %s", err)
 		}
-		EventsToJSON(events)
+		response, err := ResponseToJson(cmd, events)
+		if err != nil {
+			fmt.Print(err)
+		}
+		fmt.Print(response)
 	},
 }
 
@@ -40,14 +45,20 @@ var getEventCmd = &cobra.Command{
 		if err != nil {
 			log.Fatalf("error retrieving event %s: %s", eventId, err)
 		}
-		EventToJSON(event)
+		response, err := ResponseToJson(cmd, event)
+		if err != nil {
+			fmt.Print(err)
+		}
+		fmt.Print(response)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(eventsCmd)
+	eventsCmd.Flags().StringVarP(&format, "format", "f", "false", "Pass true for formatted JSON. Default is false")
 	eventsCmd.AddCommand(getEventCmd)
 
 	getEventCmd.Flags().String("id", "", "ID of the event to retrieve")
+	getEventCmd.Flags().StringVarP(&format, "format", "f", "false", "Pass true for formatted JSON. Default is false")
 	getEventCmd.MarkFlagRequired("id")
 }

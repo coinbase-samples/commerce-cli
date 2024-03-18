@@ -2,6 +2,7 @@ package cli
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"time"
 
@@ -24,16 +25,19 @@ var chargesCmd = &cobra.Command{
 			if err != nil {
 				log.Fatalf("Error obtaining charge: %s - error: %s", chargeId, err)
 			}
-			ChargeToJSON(charge)
-			return
+			resp, err := ResponseToJson(cmd, charge)
+			if err != nil {
+				fmt.Print(err)
+			}
+			fmt.Print(resp)
 		}
 
 		log.Fatal("Please specify an action `create` or provide an --id to retrieve a charge")
-
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(chargesCmd)
+	chargesCmd.Flags().StringVarP(&format, "format", "f", "false", "Pass true for formatted JSON. Default is false")
 	chargesCmd.Flags().StringVar(&chargeId, "id", "", "Retrieve a charge by its id")
 }
