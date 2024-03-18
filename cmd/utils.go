@@ -21,8 +21,8 @@ Charges are presented in JSON format. All errors are returned in a standard erro
 var EventsLongDescription = `Interact with the Coinbase Commerce events endpoint to view event details. Use the --all flag to retrieve all events associated with your account. The --get flag requires an event_id and retrieves details of a specific event.
 
 Examples:
-- Retrieve all events: 'commerce events --all'
-- Retrieve a specific event: 'commerce events --get <event_id>'
+- Retrieve all events: 'commerce events'
+- Retrieve a specific event: 'commerce events --id <event_id>'
 
 Events are displayed in JSON format.
 `
@@ -30,8 +30,9 @@ Events are displayed in JSON format.
 var CreateLongDescription = `
 
 Examples:
-- create a fixed price charge: 'commerce charges create --type fixed --amount 5.00'
-- create a donation charge: 'commerce charges create --type donation --amount 5.00'
+- create a fixed price charge: 'commerce charges create --type fixed_price --amount 5.00'
+- create a donation charge: 'commerce charges create --type no_price'
+- create a charge with a formatted response : 'commerce charges create --type no_price --format true'
 `
 
 func ResponseToJson(cmd *cobra.Command, response interface{}) (string, error) {
