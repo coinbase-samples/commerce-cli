@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/coinbase-samples/commerce-sdk-go"
+	"github.com/spf13/cobra"
 )
 
 var ChargesLongDescription = `Interact with the Coinbase Commerce charges endpoint to create and view charges. Use --setPrice to create a new charge with a specified USD amount. The --get flag requires a charge_id to retrieve a specific charge.
@@ -33,30 +34,31 @@ Examples:
 - create a donation charge: 'commerce charges create --type donation --amount 5.00'
 `
 
-func EventToJSON(e *commerce.SingleEvent) {
-	eventJson, err := json.MarshalIndent(e, "", " ")
+func ResponseToJson(cmd *cobra.Command, response interface{}) (string, error) {
+	formatBool, err := CheckFormatFlag(cmd)
 	if err != nil {
-		log.Fatalf("error marshalling events into JSON \n all events: %v ", e)
+		return "", err
 	}
-	fmt.Printf("event %s found \n", string(eventJson))
-
+	resp, err := MarshalJSON(response, formatBool)
+	if err != nil {
+		return "", err
+	}
+	return string(resp), nil
 }
 
-func EventsToJSON(e *commerce.EventResponse) {
-	eventsJson, err := json.MarshalIndent(e, "", " ")
+func CheckFormatFlag(cmd *cobra.Command) (bool, error) {
+	formatFlagValue, err := cmd.Flags().GetString("format")
 	if err != nil {
-		log.Fatalf("error marshalling events into JSON \n all events: %v ", e)
+		return false, fmt.Errorf("cannot read format flag: %w", err)
 	}
-	fmt.Println(string(eventsJson))
+	return formatFlagValue == "true", nil
 }
 
-func ChargeToJSON(c *commerce.ChargeResponse) {
-	chargeJson, err := json.MarshalIndent(c, "", " ")
-	if err != nil {
-		log.Fatalf("error marshalling response into JSON: %s \n. charge response: %v", err, c)
+func MarshalJSON(data interface{}, format bool) ([]byte, error) {
+	if format {
+		return json.MarshalIndent(data, "", " ")
 	}
-	fmt.Printf("charge: %s", string(chargeJson))
-
+	return json.Marshal(data)
 }
 
 func BuildCharge(chargeType, amount, currency, redirect string) *commerce.ChargeRequest {
