@@ -24,7 +24,7 @@ var createCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 
-		if amount == "" {
+		if chargeType == "fixed_price" && amount == "" {
 			log.Fatal("Please specify a price with --amount or -p when creating a charge")
 		}
 
@@ -48,7 +48,6 @@ func init() {
 	createCmd.Flags().StringVarP(&amount, "amount", "p", "", "Set amount to charge")
 	createCmd.Flags().StringVarP(&redirect, "redirect", "r", "", "URL to redirect to after charge creation")
 	createCmd.Flags().StringVarP(&currency, "currency", "c", "USD", "Currency of the charge (ex: USD)")
-	createCmd.Flags().StringVarP(&chargeType, "type", "t", "fixed_price", "Type of the charge: 'fixed' or 'none'")
+	createCmd.Flags().StringVarP(&chargeType, "type", "t", "fixed_price", "Type of the charge: 'fixed_price' or 'no_price'")
 	createCmd.Flags().StringVarP(&format, "format", "f", "false", "Pass true for formatted JSON. Default is false")
-	createCmd.MarkFlagRequired("amount")
 }
