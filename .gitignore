@@ -1,4 +1,3 @@
 commerce-cli
-.envrc
-.env
+.env*
 .DS_STORE
