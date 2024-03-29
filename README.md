@@ -15,7 +15,7 @@ export COMMERCE_API_KEY=123-YOUR-API-KEY
 2. Create the Commerce CLI application by running:
 
 ```shell
-make start
+make build
 ```
 
 This will build the CLI and move the executible to your local bin folder
@@ -23,7 +23,7 @@ This will build the CLI and move the executible to your local bin folder
 3. Create a charge by running:
 
    ```shell
-   commerce charges --setPrice 1.5
+   commerce charges create --type "fixed_price" --amount "100" --currency "USD" --redirect "http://example.com/success"
    ```
 
    This will create a $1.50 charge with a payment link (hosted_url)
@@ -104,7 +104,7 @@ The Coinbase Commerce CLI tool allows you to create and view charges with a vali
 ### Create a charge
 
 ```shell
-commerce charges --setPrice [amount]
+commerce charges create --type "fixed_price" --amount "100" --currency "USD"
 ```
 
 Replace `[amount]` with the desired charge amount (e.g., 1.5 for $1.50).
@@ -112,10 +112,10 @@ Replace `[amount]` with the desired charge amount (e.g., 1.5 for $1.50).
 ### Retrieve a charge
 
 ```shell
-commerce charges --get [charge_id]
+commerce charges --id "yourChargeIdHere" --format true
 ```
 
-Replace `[charge_id]` with the specific ID of the charge you want to retrieve.
+Replace `yourChargeIdHere` with the specific ID of the charge you want to retrieve.
 
 ### Events
 
@@ -124,7 +124,7 @@ The Coinbase Commerce CLI tool also supports the retrieval of events.
 To retrieve all events for you account run:
 
 ```shell
-commerce events --all
+commerce events
 ```
 
 ### Retrieve a specific event
@@ -133,7 +133,7 @@ commerce events --all
 > Be sure to use the event's `id` **not** the charge's `id` or charge's `code` this will prevent any errors from occuring.
 
 ```shell
-commerce events --get [event_id]
+commerce events --get [event_id] --format true
 ```
 
 Replace `[event_id]` with the ID of the event you wish to retrieve.
