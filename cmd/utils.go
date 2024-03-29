@@ -25,10 +25,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var ChargesLongDescription = `Interact with the Coinbase Commerce charges endpoint to create and view charges. Use --setPrice to create a new charge with a specified USD amount. The --get flag requires a charge_id to retrieve a specific charge.
+var ChargesLongDescription = `Interact with the Coinbase Commerce charges endpoint to create and view charges.
 
 Examples:
-- Create a new charge: 'commerce charges create --amount 2'
+- Create a new charge: 'commerce charges create --type "no_price"'
 - Retrieve a specific charge: 'commerce charges --id <charge_id>'
 
 Charges are presented in JSON format. All errors are returned in a standard error format.
