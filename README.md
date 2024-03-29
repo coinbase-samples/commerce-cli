@@ -1,6 +1,6 @@
 # Coinbase Commerce CLI tool
 
-The _Coinbase Commerce CLI Tool_ is a cli interface for interacting with the [_Commerce Go SDK_](https://github.com/coinbase-samples/commerce-sdk-go) sample library, an SDK built on top of the [Coinbase Commerce API](https://www.coinbase.com/commerce).
+The _Coinbase Commerce CLI Tool_ is a cli interface for interacting with the [_Commerce Go SDK_](https://github.com/coinbase-samples/commerce-sdk-go) sample library, an SDK built on top of the [Coinbase Commerce API](https://docs.cloud.coinbase.com/commerce-onchain/reference).
 
 Easily create, retrieve, and review charges using command line arguments.
 
