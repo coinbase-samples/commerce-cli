@@ -1,5 +1,3 @@
-github.com/coinbase-samples/commerce-sdk-go v0.1.2 h1:rzDx84HYiOABaPoX02d2sGi0CW6Lgxf8HH5vIgxJwW8=
-github.com/coinbase-samples/commerce-sdk-go v0.1.2/go.mod h1:+bBL5tXoLB/1HeuXZ9yIAg8QIcFmPL6CeBmZRoDgeZ4=
 github.com/coinbase-samples/commerce-sdk-go v0.1.3 h1:0qEliY+Yn6zG1Wpb1a6KvSEzywSD558CAGGRZPXObN4=
 github.com/coinbase-samples/commerce-sdk-go v0.1.3/go.mod h1:+bBL5tXoLB/1HeuXZ9yIAg8QIcFmPL6CeBmZRoDgeZ4=
 github.com/cpuguy83/go-md2man/v2 v2.0.2/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=

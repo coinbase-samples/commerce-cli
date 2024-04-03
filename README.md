@@ -1,6 +1,6 @@
 # Coinbase Commerce CLI tool
 
-The _Coinbase Commerce CLI Tool_ is a cli interface for interacting with the [_Commerce Go SDK_](https://github.com/coinbase-samples/commerce-sdk-go) sample library, an SDK built on top of the [Coinbase Commerce API](https://www.coinbase.com/commerce).
+The _Coinbase Commerce CLI Tool_ is a cli interface for interacting with the [_Commerce Go SDK_](https://github.com/coinbase-samples/commerce-sdk-go) sample library, an SDK built on top of the [Coinbase Commerce API](https://docs.cloud.coinbase.com/commerce-onchain/reference).
 
 Easily create, retrieve, and review charges using command line arguments.
 
@@ -15,7 +15,7 @@ export COMMERCE_API_KEY=123-YOUR-API-KEY
 2. Create the Commerce CLI application by running:
 
 ```shell
-make start
+make build
 ```
 
 This will build the CLI and move the executible to your local bin folder
@@ -23,7 +23,7 @@ This will build the CLI and move the executible to your local bin folder
 3. Create a charge by running:
 
    ```shell
-   commerce charges --setPrice 1.5
+   commerce charges create --type "fixed_price" --amount "100" --currency "USD" --redirect "http://example.com/success"
    ```
 
    This will create a $1.50 charge with a payment link (hosted_url)
@@ -35,13 +35,13 @@ This will build the CLI and move the executible to your local bin folder
     "brand_color": "#000000",
     "brand_logo_url": "https://res.cloudinary.com/commerce/image/upload/v1653516296/dlwoolpero6qgsffxmpz.jpg",
     "charge_kind": "WEB3",
-    "code": "6EE5J2V8",
+    "code": "6EE5J2V9",
     "confirmed_at": "",
     "created_at": "2024-01-15T21:32:49Z",
     "expires_at": "2024-01-17T21:32:49Z",
-    "hosted_url": "https://commerce.coinbase.com/pay/131bf7a0-69be-4b63-a8da-847ff831eb46",
+    "hosted_url": "https://commerce.coinbase.com/pay/131bf7a0-69be-4b63-a8da-847ff831bb46",
     "id": "131bf7a0-69be-4b63-a8da-847ff831eb46",
-    "organization_name": "Patrick's Fine Art",
+    "organization_name": "Online Store",
     "pricing": {
       "local": {
         "amount": "1.5",
@@ -58,7 +58,7 @@ This will build the CLI and move the executible to your local bin folder
       "success_url": "",
       "will_redirect_after_success": false
     },
-    "support_email": "patrick.hughes@coinbase.com",
+    "support_email": "support@email.com",
     "timeline": [
       {
         "status": "NEW",
@@ -104,7 +104,7 @@ The Coinbase Commerce CLI tool allows you to create and view charges with a vali
 ### Create a charge
 
 ```shell
-commerce charges --setPrice [amount]
+commerce charges create --type "fixed_price" --amount "100" --currency "USD"
 ```
 
 Replace `[amount]` with the desired charge amount (e.g., 1.5 for $1.50).
@@ -112,10 +112,10 @@ Replace `[amount]` with the desired charge amount (e.g., 1.5 for $1.50).
 ### Retrieve a charge
 
 ```shell
-commerce charges --get [charge_id]
+commerce charges --id "yourChargeIdHere" --format true
 ```
 
-Replace `[charge_id]` with the specific ID of the charge you want to retrieve.
+Replace `yourChargeIdHere` with the specific ID of the charge you want to retrieve.
 
 ### Events
 
@@ -124,7 +124,7 @@ The Coinbase Commerce CLI tool also supports the retrieval of events.
 To retrieve all events for you account run:
 
 ```shell
-commerce events --all
+commerce events
 ```
 
 ### Retrieve a specific event
@@ -133,7 +133,7 @@ commerce events --all
 > Be sure to use the event's `id` **not** the charge's `id` or charge's `code` this will prevent any errors from occuring.
 
 ```shell
-commerce events --get [event_id]
+commerce events --get [event_id] --format true
 ```
 
 Replace `[event_id]` with the ID of the event you wish to retrieve.
